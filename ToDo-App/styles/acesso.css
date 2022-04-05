@@ -49,14 +49,23 @@ input:focus {
 
 small {
   display: flex;
+  margin-top:3px;
+  letter-spacing: 0.05rem;
+}
+
+#repetirSenhaValidacaoCadastro {
+  display: flex;
+  margin-top:3px;
+  letter-spacing: 0.05rem;
 }
 
 label {
   width: 100%;
-  font-weight: 300;
+  font-weight: bold;
   margin-bottom: -.1em;
   margin-top: 1em;
-  font-size: .8em;
+  font-size: 0.8rem;
+  letter-spacing: 0.05rem;
 }
 
 button {
@@ -99,23 +108,28 @@ button:disabled {
 }
 
 /* Estilo confirmação de senha */
-#message {
-  /* display:none; */
-  color: #6C63FF;
-  position: relative;
-  padding: 10px
-}
-
-#message p {
-  color: #6e6e6e;
-  padding: 2px;
-  font-size: 12px;
+#mensagem {
+  display:flex;
+  flex-direction: column;
+  margin:5px;
+  padding:5px;
 }
 
 .valid {
-  color: #6C63FF;
+  color: rgba(48, 129, 170, 0.75);
 }
 
 .invalid {
-  color: #6e6e6e;
+  color: rgba(255, 0, 0, 0.75);
+}
+
+#mensagem h3 {
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+}
+
+#mensagem p {
+  font-size: 0.85rem;
+  margin-bottom: 5px;
 }
