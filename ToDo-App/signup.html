@@ -9,11 +9,6 @@
 
   <!-- ---------------- estilos compartilhados entre login e signup ---------------- -->
   <link rel="stylesheet" href="styles/acesso.css">
-
-  <!-- ---------------------- lógica aplicada no registro -------------------- -->
-  <script src="scripts/validacoes/utils.js"></script>
-  <script src="scripts/signup/script.js"></script>
-
 </head>
 
 <body>
@@ -39,7 +34,7 @@
       </label>
       <label>
         Email:
-        <input type="text" id="inEmail">
+        <input type="email" id="inEmail">
         <small id="emailValidacao"></small>
       </label>
       <label>
@@ -49,6 +44,12 @@
       <label>
         Repetir senha:
         <input type="password" id="inConfSenha">
+        <div id="message">
+          <h4>A senha deve conter:</h4>
+          <p id="length" class="invalid">A senha deve conter pelo menos <b>8 caracteres</b></p>
+          <p id="letter" class="invalid">Pelo menos <b>1 letra</b></p>
+          <p id="number" class="invalid">Pelo menos <b>1 número</b></p>
+        </div>
       </label>
 
       <button id="btSignup">Criar conta</button>
@@ -59,7 +60,8 @@
     </div>
   </div>
 
-  
+  <script src="scripts/validacoes/utils.js"></script>
+  <script src="scripts/signup/script.js"></script>
 </body>
 
 </html>

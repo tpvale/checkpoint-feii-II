@@ -69,7 +69,7 @@ button {
 }
 
 button:disabled {
-  background-color: #6e6e6e
+  background-color: #6e6e6e;
 }
 
 .form-header {
@@ -98,3 +98,24 @@ button:disabled {
   justify-content: center;
 }
 
+/* Estilo confirmação de senha */
+#message {
+  /* display:none; */
+  color: #6C63FF;
+  position: relative;
+  padding: 10px
+}
+
+#message p {
+  color: #6e6e6e;
+  padding: 2px;
+  font-size: 12px;
+}
+
+.valid {
+  color: #6C63FF;
+}
+
+.invalid {
+  color: #6e6e6e;
+}
