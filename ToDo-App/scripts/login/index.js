@@ -15,7 +15,7 @@ botaoSalvar.innerText = "Acessar"
 //Cria o objeto que representa o login do usuário
 const usuarioObjeto = {
     email: "",
-    senha: ""
+    password: ""
 }
 
 //Executa ao clicar no botão de Acessar
@@ -31,10 +31,45 @@ botaoSalvar.addEventListener('click', function (evento) {
 
         //Atribui as variáveis normalizadas ao objeto do login
         usuarioObjeto.email = campoEmailLoginNormalizado;
-        usuarioObjeto.senha = campoSenhaLoginNormalizado;
+        usuarioObjeto.password = campoSenhaLoginNormalizado;
 
         console.log(usuarioObjeto);
 
+
+        let loginUsuarioJson = JSON.stringify(usuarioObjeto);
+
+
+        //Executar o acesso a API com o login
+        let urlEndPointLogin = "https://ctd-todo-api.herokuapp.com/v1/users/login";
+        let configDaRequisicao = {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: loginUsuarioJson
+        }
+
+        fetch(urlEndPointLogin, configDaRequisicao).then(
+            resultado => {
+                return resultado.json();
+            }
+
+        ).then(
+            resultado => {
+                console.log(resultado.jwt);
+            }
+
+
+        ).catch(
+            erro => {
+                console.log(erro);
+            }
+        );
+
+
+    // Storage
+    // let loginUsuarioEmJson = JSON.stringify(usuarioObjeto);
+    // localStorage.setItem(1, loginUsuarioEmJson);
     //Se a validação NÃO passar, se for false o retorno da função....
     } else {
         evento.preventDefault();
@@ -94,7 +129,6 @@ function validaTelaDeLogin() {
         return false
     }
 }
-
 
 
 
