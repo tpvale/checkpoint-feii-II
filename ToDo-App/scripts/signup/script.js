@@ -1,8 +1,8 @@
-// VALIDAÇÃO TODOS OS CAMPOS
+                                  // VALIDAÇÃO TODOS OS CAMPOS
 
 //Capturando os campos do formulário
 var campoNomeCadastro = document.getElementById('inNome')
-var campoApelidoCadastro = document.getElementById('inApelido')
+var campoSobrenomeCadastro = document.getElementById('inSobrenome')
 var campoEmailCadastro = document.getElementById('inEmail')
 var botaoCriarConta = document.getElementById('btSignup')
 // var senha = document.getElementById('senha') LA EMBAIXO
@@ -10,17 +10,21 @@ var botaoCriarConta = document.getElementById('btSignup')
 
 // Normalizando campos do formulario
 let campoNomeCadastroNormalizado
-let campoApelidoCadastroNormalizado
+let campoSobrenomeCadastroNormalizado
 let campoEmailCadastroNormalizado
 let campoSenhaCadastroNormalizado
 let campoRepetirSenhaCadastroNormalizado
 
 // Criando variaveis definindo como false de inicio para validar
 let nomeCadastroEValido = false
-let apelidoCadastroEValido = false
+let sobrenomeCadastroEValido = false
 let emailCadastroEValido = false
-// let senhaCadastroEValido = false
-repetirSenhaCadastroEValido = false
+let senhaMinCadastroEvalido = false
+let senhaMaiCadastroEvalido = false
+let senhaNumCadastroEvalido = false
+let senhaTamCadastroEvalido = false
+let repetirSenhaCadastroEValido = false
+
 
 //Desabilita o botão ao iniciar a página
 botaoCriarConta.setAttribute('disabled', true)
@@ -29,7 +33,7 @@ botaoCriarConta.style.background = 'gray'
 //Cria o objeto que representa o cadastro do usuário
 const criacaoUsuario = {
   nome: '',
-  apelido: '',
+  sobrenome: '',
   email: '',
   senha: '',
   repetirSenha: ''
@@ -42,8 +46,8 @@ botaoCriarConta.addEventListener('click', function (evento) {
     campoNomeCadastroNormalizado = retiraEspacosDeUmValorInformado(
       campoNomeCadastro.value
     )
-    campoApelidoCadastroNormalizado = retiraEspacosDeUmValorInformado(
-      campoApelidoCadastro.value
+    campoSobrenomeCadastroNormalizado = retiraEspacosDeUmValorInformado(
+      campoSobrenomeCadastro.value
     )
 
     campoEmailCadastroNormalizado = retiraEspacosDeUmValorInformado(
@@ -59,7 +63,7 @@ botaoCriarConta.addEventListener('click', function (evento) {
 
     //Atribui as variáveis normalizadas ao objeto do login
     criacaoUsuario.nome = campoNomeCadastroNormalizado
-    criacaoUsuario.apelido = campoApelidoCadastroNormalizado
+    criacaoUsuario.sobrenome = campoSobrenomeCadastroNormalizado
     criacaoUsuario.email = campoEmailCadastroNormalizado
     criacaoUsuario.senha = campoRepetirSenhaCadastroNormalizado
     criacaoUsuario.repetirSenha = campoRepetirSenhaCadastroNormalizado
@@ -93,26 +97,26 @@ campoNomeCadastro.addEventListener('blur', function () {
   validacaoTelaCadastro()
 })
 
-//Ao clicar e interagir com campo APELIDO do cadastro
-campoApelidoCadastro.addEventListener('blur', function () {
+//Ao clicar e interagir com campo Sobrenome do cadastro
+campoSobrenomeCadastro.addEventListener('blur', function () {
   //Capturando o elemento <Small> do html
-  var apelidoValidacaoCadastro = document.getElementById(
-    'apelidoValidacaoCadastro'
+  var sobrenomeValidacaoCadastro = document.getElementById(
+    'sobrenomeValidacaoCadastro'
   )
 
-  if (campoApelidoCadastro.value != '') {
-    //Apelido tem informação
-    apelidoValidacaoCadastro.innerText = ''
-    campoApelidoCadastro.style.border = ``
-    apelidoCadastroEValido = true
+  if (campoSobrenomeCadastro.value != '') {
+    //Sobrenome tem informação
+    sobrenomeValidacaoCadastro.innerText = ''
+    campoSobrenomeCadastro.style.border = ``
+    sobrenomeCadastroEValido = true
   } else {
-    //Apelido está vazio
-    apelidoValidacaoCadastro.innerText = 'Campo obrigatório'
-    apelidoValidacaoCadastro.style.color = 'rgba(255, 0, 0, 0.75)'
-    apelidoValidacaoCadastro.style.fontSize = '8'
-    apelidoValidacaoCadastro.style.fontWeight = 'bold'
-    campoApelidoCadastro.style.border = `1px solid rgba(255, 0, 0, 0.75)`
-    apelidoCadastroEValido = false
+    //Sobrenome está vazio
+    sobrenomeValidacaoCadastro.innerText = 'Campo obrigatório'
+    sobrenomeValidacaoCadastro.style.color = 'rgba(255, 0, 0, 0.75)'
+    sobrenomeValidacaoCadastro.style.fontSize = '8'
+    sobrenomeValidacaoCadastro.style.fontWeight = 'bold'
+    campoSobrenomeCadastro.style.border = `1px solid rgba(255, 0, 0, 0.75)`
+    sobrenomeCadastroEValido = false
   }
   validacaoTelaCadastro()
 })
@@ -188,9 +192,11 @@ campoSenhaCadastro.onkeyup = function () {
   if (campoSenhaCadastro.value.match(letrasMinusculas)) {
     letraMin.classList.remove('invalid')
     letraMin.classList.add('valid')
+    senhaMinCadastroEvalido = true
   } else {
     letraMin.classList.remove('valid')
     letraMin.classList.add('invalid')
+    senhaMinCadastroEvalido = false
   }
 
   // Validação Letras Maiusculas
@@ -198,9 +204,11 @@ campoSenhaCadastro.onkeyup = function () {
   if (campoSenhaCadastro.value.match(letrasMaiusculas)) {
     letraMai.classList.remove('invalid')
     letraMai.classList.add('valid')
+    senhaMaiCadastroEvalido = true
   } else {
     letraMai.classList.remove('valid')
     letraMai.classList.add('invalid')
+    senhaMaiCadastroEvalido = false
   }
 
   // Validação Numeros
@@ -208,20 +216,25 @@ campoSenhaCadastro.onkeyup = function () {
   if (campoSenhaCadastro.value.match(numeros)) {
     numero.classList.remove('invalid')
     numero.classList.add('valid')
+    senhaNumCadastroEvalido = true
   } else {
     numero.classList.remove('valid')
     numero.classList.add('invalid')
+    senhaNumCadastroEvalido = false
   }
 
   // Validação Comprimento
   if (campoSenhaCadastro.value.length >= 8) {
     comprimento.classList.remove('invalid')
     comprimento.classList.add('valid')
+    senhaTamCadastroEvalido = true
   } else {
     comprimento.classList.remove('valid')
     comprimento.classList.add('invalid')
+    senhaTamCadastroEvalido = false
   }
 }
+
 
 // VALIDAÇÃO REPETIR SENHA
 
@@ -255,9 +268,13 @@ campoRepetirSenhaCadastro.addEventListener('blur', function () {
 function validacaoTelaCadastro() {
   if (
     nomeCadastroEValido &&
-    apelidoCadastroEValido &&
+    sobrenomeCadastroEValido &&
     emailCadastroEValido &&
-    repetirSenhaCadastroEValido
+    repetirSenhaCadastroEValido &&
+    senhaMinCadastroEvalido && 
+    senhaMaiCadastroEvalido && 
+    senhaNumCadastroEvalido && 
+    senhaTamCadastroEvalido
   ) {
     botaoCriarConta.removeAttribute('disabled')
     botaoCriarConta.innerText = 'Criar Conta'

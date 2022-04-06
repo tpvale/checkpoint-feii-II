@@ -1,6 +1,6 @@
 //Capturando os campos do formulário
 let campoEmailLogin = document.getElementById('inputEmail');
-let campoSenhaLogin = document.getElementById('inputPassword');
+let campoSenhaLogin = document.getElementById('inputSenha');
 let botaoSalvar = document.getElementById('botaoSalvar');
 
 let campoEmailLoginNormalizado;
@@ -10,7 +10,7 @@ let emailEValido = false;
 
 //Desabilita o botão ao iniciar a página
 botaoSalvar.setAttribute('disabled', true);
-botaoSalvar.innerText = "Bloqueado"
+botaoSalvar.innerText = "Acessar"
 
 //Cria o objeto que representa o login do usuário
 const usuarioObjeto = {
@@ -62,17 +62,35 @@ campoEmailLogin.addEventListener('blur', function () {
         campoEmailLogin.style.border = `1px solid #E01E1E`
         emailEValido = false;
     }
+
+    let senhaValidacao = document.getElementById('senhaValidacao');
+
+    if (campoSenhaLogin.value != "") {
+        //Senha tem informação
+        senhaValidacao.innerText = ""
+        campoSenhaLogin.style.border = ``
+        senhaEValido = true;
+    } else {
+        //Senha está vazio
+        senhaValidacao.innerText = "Campo obrigatório"
+        senhaValidacao.style.color = "#E01E1E"
+        senhaValidacao.style.fontSize = "8"
+        senhaValidacao.style.fontWeight = "bold"
+        campoSenhaLogin.style.border = `1px solid #E01E1E`
+        senhaEValido = false;
+    }
+
     validaTelaDeLogin();
 });
 
 function validaTelaDeLogin() {
-    if (emailEValido) {
+    if (emailEValido && senhaEValido) {
         botaoSalvar.removeAttribute('disabled')
         botaoSalvar.innerText = "Acessar"
         return true
     } else {
         botaoSalvar.setAttribute('disabled', true);
-        botaoSalvar.innerText = "Bloqueado"
+        botaoSalvar.innerText = "Acessar"
         return false
     }
 }
