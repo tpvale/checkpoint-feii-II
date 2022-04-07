@@ -278,7 +278,7 @@ function validacaoTelaCadastro() {
   ) {
     botaoCriarConta.removeAttribute('disabled')
     botaoCriarConta.innerText = 'Criar Conta'
-    botaoCriarConta.style.background = 'rgba(24, 142, 106, 0.717)'
+    botaoCriarConta.style.background = '#7898FF'
     return true
   } else {
     botaoCriarConta.setAttribute('disabled', true)

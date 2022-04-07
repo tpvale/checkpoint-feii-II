@@ -7,6 +7,7 @@ let campoEmailLoginNormalizado;
 let campoSenhaLoginNormalizado;
 
 let emailEValido = false;
+let senhaEValido = false;
 
 //Desabilita o botão ao iniciar a página
 botaoSalvar.setAttribute('disabled', true);
@@ -24,6 +25,7 @@ botaoSalvar.addEventListener('click', function (evento) {
     //Se a validação passar, se for true o retorno da função....
     if (validaTelaDeLogin()) {
         //Normalizando - Retirando os espaços em branco
+        evento.preventDefault();
         campoEmailLoginNormalizado = retiraEspacosDeUmValorInformado(campoEmailLogin.value);
         campoSenhaLoginNormalizado = retiraEspacosDeUmValorInformado(campoSenhaLogin.value);
 
@@ -32,51 +34,50 @@ botaoSalvar.addEventListener('click', function (evento) {
         //Atribui as variáveis normalizadas ao objeto do login
         usuarioObjeto.email = campoEmailLoginNormalizado;
         usuarioObjeto.password = campoSenhaLoginNormalizado;
-
-        console.log(usuarioObjeto);
-
-
         let loginUsuarioJson = JSON.stringify(usuarioObjeto);
-
-
-        //Executar o acesso a API com o login
-        let urlEndPointLogin = "https://ctd-todo-api.herokuapp.com/v1/users/login";
-        let configDaRequisicao = {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: loginUsuarioJson
-        }
-
-        fetch(urlEndPointLogin, configDaRequisicao).then(
-            resultado => {
-                return resultado.json();
-            }
-
-        ).then(
-            resultado => {
-                console.log(resultado.jwt);
-            }
-
-
-        ).catch(
-            erro => {
-                console.log(erro);
-            }
-        );
-
-
-    // Storage
-    // let loginUsuarioEmJson = JSON.stringify(usuarioObjeto);
-    // localStorage.setItem(1, loginUsuarioEmJson);
-    //Se a validação NÃO passar, se for false o retorno da função....
+        login(loginUsuarioJson);
     } else {
         evento.preventDefault();
         alert("Ambas as informações devem ser preenchidas");
     }
-
 });
+
+
+function login(loginUsuarioJson) {
+
+    //Executar o acesso a API com o login
+    let urlEndPointLogin = "https://ctd-todo-api.herokuapp.com/v1/users/login";
+    let configDaRequisicao = {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: loginUsuarioJson
+    }
+
+    fetch(urlEndPointLogin, configDaRequisicao)
+    .then(
+        resultado => {
+            if (resultado.status == 201) {
+            return resultado.json();
+        }
+        throw resultado;
+    }).then(
+        resultado => {
+            console.log(resultado.jwt);
+            sessionStorage.setItem("jwt", resultado.jwt);
+            location.href = "tarefas.html";
+        }
+
+
+    ).catch(
+        erro => {
+            console.log(erro);
+        }
+    );
+
+}
+// criar funções para sucesso e erro de login
 
 //Ao clicar e interagir com o campo de "email" no formulário
 campoEmailLogin.addEventListener('blur', function () {
@@ -120,7 +121,7 @@ campoEmailLogin.addEventListener('blur', function () {
 
 function validaTelaDeLogin() {
     if (emailEValido && senhaEValido) {
-        botaoSalvar.removeAttribute('disabled')
+        botaoSalvar.removeAttribute('disabled');
         botaoSalvar.innerText = "Acessar"
         return true
     } else {
