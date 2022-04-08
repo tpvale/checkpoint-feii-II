@@ -32,48 +32,65 @@ botaoCriarConta.style.background = 'gray'
 
 //Cria o objeto que representa o cadastro do usuário
 const criacaoUsuario = {
-  nome: '',
-  sobrenome: '',
+  firstName: '',
+  lastName: '',
   email: '',
-  senha: '',
-  repetirSenha: ''
+  password: ''
 }
 
 //Executa ao clicar no botão de Cadastrar
 botaoCriarConta.addEventListener('click', function (evento) {
   //Se a validação passar, se for true o retorno da função....
   if (validacaoTelaCadastro()) {
-    campoNomeCadastroNormalizado = retiraEspacosDeUmValorInformado(
-      campoNomeCadastro.value
-    )
-    campoSobrenomeCadastroNormalizado = retiraEspacosDeUmValorInformado(
-      campoSobrenomeCadastro.value
-    )
-
-    campoEmailCadastroNormalizado = retiraEspacosDeUmValorInformado(
-      campoEmailCadastro.value
-    )
-    campoEmailCadastroNormalizado =
-      converteValorRecebidoEmMinusculo(campoEmailCadastro)
-
-    campoSenhaCadastroNormalizado = campoSenhaCadastroNormalizado.value
-
-    campoRepetirSenhaCadastroNormalizado =
-      campoRepetirSenhaCadastroNormalizado.value
+    evento.preventDefault();
+    campoNomeCadastroNormalizado = retiraEspacosDeUmValorInformado(campoNomeCadastro.value);
+    campoSobrenomeCadastroNormalizado = retiraEspacosDeUmValorInformado(campoSobrenomeCadastro.value);
+    campoEmailCadastroNormalizado = retiraEspacosDeUmValorInformado(campoEmailCadastro.value);
+    campoEmailCadastroNormalizado = converteValorRecebidoEmMinusculo(campoEmailCadastro.value);
 
     //Atribui as variáveis normalizadas ao objeto do login
-    criacaoUsuario.nome = campoNomeCadastroNormalizado
-    criacaoUsuario.sobrenome = campoSobrenomeCadastroNormalizado
+    criacaoUsuario.firstName = campoNomeCadastroNormalizado
+    criacaoUsuario.lastName = campoSobrenomeCadastroNormalizado
     criacaoUsuario.email = campoEmailCadastroNormalizado
-    criacaoUsuario.senha = campoRepetirSenhaCadastroNormalizado
-    criacaoUsuario.repetirSenha = campoRepetirSenhaCadastroNormalizado
+    criacaoUsuario.password = campoSenhaCadastro.value
 
+    let cadastroUserJson = JSON.stringify(criacaoUsuario);
+    cadastro(cadastroUserJson);
     //Se a validação NÃO passar, se for false o retorno da função....
   } else {
     evento.preventDefault()
     alert('Todas as informações devem ser preenchidas')
   }
 })
+
+function cadastro(cadastroUserJson) {
+      //Executar o acesso a API com o login
+      let urlEndPointCadastro = "https://ctd-todo-api.herokuapp.com/v1/users";
+      let configDaRequisicao = {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: cadastroUserJson
+      }
+  
+      fetch(urlEndPointCadastro, configDaRequisicao)
+      .then(
+          resultado => {
+            if (resultado.status == 201) {
+            return resultado.json();
+          }
+          throw resultado;
+      }).then(
+          resultado => {
+            console.log(resultado.jwt);
+            localStorage.setItem("jwt", resultado.jwt);
+            location.href = "index.html";
+      }).catch(
+          erro => {
+          console.log(erro);
+      });
+}
 
 //Ao clicar e interagir com campo NOME do cadastro
 campoNomeCadastro.addEventListener('blur', function () {

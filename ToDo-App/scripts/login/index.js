@@ -67,17 +67,14 @@ function login(loginUsuarioJson) {
             console.log(resultado.jwt);
             sessionStorage.setItem("jwt", resultado.jwt);
             location.href = "tarefas.html";
-        }
-
-
-    ).catch(
+    }).catch(
         erro => {
-            console.log(erro);
-        }
-    );
+        console.log(erro);
+    });
 
 }
-// criar funções para sucesso e erro de login
+// TO-DO criar funções para sucesso e erro de login
+
 
 //Ao clicar e interagir com o campo de "email" no formulário
 campoEmailLogin.addEventListener('blur', function () {
