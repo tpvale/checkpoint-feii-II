@@ -95,7 +95,10 @@ campoEmailLogin.addEventListener('blur', function () {
         campoEmailLogin.style.border = `1px solid #E01E1E`
         emailEValido = false;
     }
+    validaTelaDeLogin();
+});
 
+campoSenhaLogin.addEventListener('blur', function() {
     let senhaValidacao = document.getElementById('senhaValidacao');
 
     if (campoSenhaLogin.value != "") {
@@ -112,7 +115,6 @@ campoEmailLogin.addEventListener('blur', function () {
         campoSenhaLogin.style.border = `1px solid #E01E1E`
         senhaEValido = false;
     }
-
     validaTelaDeLogin();
 });
 
