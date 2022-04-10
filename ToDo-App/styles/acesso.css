@@ -2,6 +2,8 @@
 
 body{
   display: flex;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 h1 {
@@ -13,33 +15,45 @@ h1 {
 form {
   position: relative;
   max-width: 26em;
-  background-color: white;
+  /* background-color: white;*/
+  background: transparent;
+  color:white;
   display: flex;
   align-items: center;
   flex-direction: column;
   margin: 2em auto;
-  box-shadow: 0 5px 5px lightgrey;
+  box-shadow: 0 4px 1px rgba(222, 73, 239, 0.5);
   padding: 1em 2.5em;
   box-sizing: border-box;
+  border-top: 0.1px solid rgba(222, 73, 239, 0.6);
+  border-right: 0.1px solid rgba(222, 73, 239, 0.6);
+  border-radius: 3px;
 }
 
 form:after {
   position: absolute;
   content: '';
-  width: .7em;
+  width: .6em;
   height: 100%;
   top: 0;
   left: 0;
-  background: linear-gradient(var(--primary), var(--secondary));
+  background: linear-gradient(100deg, rgba(255, 255, 255),rgba(222, 73, 239, 0.6));
 }
 
 
 input {
+  color:white;
   width: 100%;
   padding: .4em .5em;
-  background-color: var(--app-grey);
+  margin-top: 4px;
+  /*background-color: var(--app-grey);
   border: 1px solid var(--app-grey);
   border-radius: .2em;
+  box-shadow: 2px 1px 2px 0px rgba(255, 255, 255);*/
+  background: transparent;
+  border: transparent;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.728);
+  border-radius: 5px;
 }
 
 input:focus {
@@ -69,12 +83,14 @@ label {
 }
 
 button {
-  padding: .5em 3em;
+  padding: .5rem 1.75rem;
   background-color: var(--primary);
   color: white;
-  margin-top: 2em;
-  font-weight: 400;
-  font-size: 1em;
+  margin-top: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+  font-size: 1rem;
+  border-radius: 5px;
 }
 
 button:disabled {
@@ -82,7 +98,7 @@ button:disabled {
 }
 
 .form-header {
-  color: grey;
+  color: rgb(255, 255, 255);
   font-size: 2em;
 }
 .ingressar{
@@ -90,14 +106,17 @@ button:disabled {
 }
 .left{
   width: 50%;  
-  background-color: white;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: rgb(220, 219, 219);;
 }
 .left img{
   width:60%;
+  padding:10px;
+  box-shadow: 10px 10px 40px 1px rgba(255, 255, 255, 0.9);
+  border-radius:999px;
 }
 .right{
   width: 50%;
@@ -105,6 +124,7 @@ button:disabled {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: rgba(10, 25, 70, 0.8)
 }
 
 /* Estilo confirmação de senha */
@@ -116,7 +136,7 @@ button:disabled {
 }
 
 .valid {
-  color: rgba(48, 129, 170, 0.75);
+  color: rgb(126, 200, 237);
 }
 
 .invalid {
@@ -132,4 +152,20 @@ button:disabled {
 #mensagem p {
   font-size: 0.85rem;
   margin-bottom: 5px;
+}
+
+small {
+  margin-top:4px;
+}
+
+.ingressar a{
+  text-decoration: none;
+  color: white;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.541);
+  border-radius:5px;
+  padding: 2px;
+}
+
+.ingressar a:hover{
+background: rgba(255, 255, 255, 0.441);
 }
