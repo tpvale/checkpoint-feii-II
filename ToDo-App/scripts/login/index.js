@@ -70,6 +70,7 @@ function login(loginUsuarioJson) {
     }).catch(
         erro => {
         console.log(erro);
+        alert("Senha ou e-mail incorreto, por gentileza verifique suas credenciais e tente novamente!");
     });
 
 }
