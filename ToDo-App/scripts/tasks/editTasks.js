@@ -1,5 +1,5 @@
-let btEditTask = document.querySelector('change')
+// let btEditTask = document.querySelector('change')
 
-btEditTask.addEventListener('click', evento => {
-  evento.preventDefault();
-})
+// btEditTask.addEventListener('click', evento => {
+//   evento.preventDefault();
+// })
