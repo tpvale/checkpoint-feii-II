@@ -1,3 +1,5 @@
+window.addEventListener('load', () => {
+
 //Capturando os campos do formulário
 let campoEmailLogin = document.getElementById('inputEmail');
 let campoSenhaLogin = document.getElementById('inputSenha');
@@ -39,12 +41,14 @@ botaoSalvar.addEventListener('click', function (evento) {
     } else {
         evento.preventDefault();
         alert("Ambas as informações devem ser preenchidas");
+        
     }
 });
 
 
 function login(loginUsuarioJson) {
-
+    //Funcao do Spinner
+    setTimeout(spinner.showSpinner(), 1000);
     //Executar o acesso a API com o login
     let urlEndPointLogin = "https://ctd-todo-api.herokuapp.com/v1/users/login";
     let configDaRequisicao = {
@@ -60,6 +64,8 @@ function login(loginUsuarioJson) {
         resultado => {
             if (resultado.status == 201) {
             return resultado.json();
+        } else {
+            spinner.removeSpinner();
         }
         throw resultado;
     }).then(
@@ -130,14 +136,6 @@ function validaTelaDeLogin() {
         return false
     }
 }
-
-
-
-
-
-
-
-
-
+})
 
 
