@@ -169,3 +169,15 @@ small {
 .ingressar a:hover{
 background: rgba(255, 255, 255, 0.441);
 }
+
+@media (max-width: 460px) {
+ .left{
+   display: none;
+  }
+
+  .right {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
