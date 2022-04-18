@@ -1,4 +1,6 @@
-                                  // VALIDAÇÃO TODOS OS CAMPOS
+window.addEventListener('load', () => {
+
+// VALIDAÇÃO TODOS OS CAMPOS
 
 //Capturando os campos do formulário
 var campoNomeCadastro = document.getElementById('inNome')
@@ -64,6 +66,8 @@ botaoCriarConta.addEventListener('click', function (evento) {
 })
 
 function cadastro(cadastroUserJson) {
+      //Funcao do Spinner
+      setTimeout(spinner.showSpinner(), 1000);
       //Executar o acesso a API com o login
       let urlEndPointCadastro = "https://ctd-todo-api.herokuapp.com/v1/users";
       let configDaRequisicao = {
@@ -79,8 +83,9 @@ function cadastro(cadastroUserJson) {
           resultado => {
             if (resultado.status == 201) {
             return resultado.json();
-          }
-          throw resultado;
+          } else {
+            spinner.removeSpinner();
+          } throw resultado;
       }).then(
           resultado => {
             console.log(resultado.jwt);
@@ -303,3 +308,5 @@ function validacaoTelaCadastro() {
     return false
   }
 }
+
+})
