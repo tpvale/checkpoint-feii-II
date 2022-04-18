@@ -63,9 +63,8 @@ function login(loginUsuarioJson) {
     .then(
         resultado => {
             if (resultado.status == 201) {
-            return resultado.json();
-        } else {
             spinner.removeSpinner();
+            return resultado.json();
         }
         throw resultado;
     }).then(

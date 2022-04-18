@@ -82,9 +82,9 @@ function cadastro(cadastroUserJson) {
       .then(
           resultado => {
             if (resultado.status == 201) {
-            return resultado.json();
-          } else {
-            spinner.removeSpinner();
+              spinner.removeSpinner();
+              return resultado.json();
+
           } throw resultado;
       }).then(
           resultado => {

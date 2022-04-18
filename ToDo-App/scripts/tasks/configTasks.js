@@ -1,7 +1,3 @@
-window.onload = () => {
-  renderizarSkeletons(5, ".tarefas-pendentes");
- };
-
 let finalizarPaginaTasks = document.getElementById('closeApp')
 let nomeMaisSobrenomeUsuario = document.querySelector('.user-info p')
 let urlDados = 'https://ctd-todo-api.herokuapp.com/v1/users/getMe'
@@ -115,3 +111,6 @@ function localizaTarefasUsuario(tokenJwt) {
 function capturaIdTarefa(idTarefa) {
   console.log(idTarefa)
 }
+
+
+     
