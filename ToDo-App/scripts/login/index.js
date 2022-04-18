@@ -1,17 +1,16 @@
 //Capturando os campos do formulário
-let campoEmailLogin = document.getElementById('inputEmail');
+let campoEmailLogin = document.getElementById('inputEmail')
 let campoSenhaLogin = document.getElementById('inputSenha');
+let loginValido = [campoEmailLogin,campoSenhaLogin]
 let botaoSalvar = document.getElementById('botaoSalvar');
-
 let campoEmailLoginNormalizado;
 let campoSenhaLoginNormalizado;
 
-let emailEValido = false;
-let senhaEValido = false;
+let loginEValido = false;
+
 
 //Desabilita o botão ao iniciar a página
 botaoSalvar.setAttribute('disabled', true);
-botaoSalvar.innerText = "Acessar"
 
 //Cria o objeto que representa o login do usuário
 const usuarioObjeto = {
@@ -70,73 +69,53 @@ function login(loginUsuarioJson) {
     }).catch(
         erro => {
         console.log(erro);
+        alert('Login ou senha inválidos')
     });
-
+    
 }
-// TO-DO criar funções para sucesso e erro de login
 
+//validacao login
+loginValido.forEach(validacaoLogin => {
+     validacaoLogin.addEventListener('keyup', function(event){
+         //pegando o input que esta acontecendo o evento
+         const inputAtual = event.target;
+         // pegando o elemento small (ta no input, dps vai para o elemento pai --label-- dps small)
+         const mensagemError = inputAtual.parentNode.querySelector(`small`)
 
-//Ao clicar e interagir com o campo de "email" no formulário
-campoEmailLogin.addEventListener('blur', function () {
-    //Capturando o elemento <Small> do html
-    let emailValidacao = document.getElementById('emailValidacao');
-
-    if (campoEmailLogin.value != "") {
-        //Email tem informação
-        emailValidacao.innerText = ""
-        campoEmailLogin.style.border = ``
-        emailEValido = true;
-    } else {
-        //Email está vazio
-        emailValidacao.innerText = "Campo obrigatório"
-        emailValidacao.style.color = "#E01E1E"
-        emailValidacao.style.fontSize = "8"
-        emailValidacao.style.fontWeight = "bold"
-        campoEmailLogin.style.border = `1px solid #E01E1E`
-        emailEValido = false;
-    }
-    validaTelaDeLogin();
+        if (inputAtual.value != "") {
+            mensagemError.innerText = ""
+            inputAtual.style.border = ``
+            //setando um atributo no input
+            inputAtual.setAttribute(`input-valido`, 'true')
+        } else {
+            mensagemError.innerText = "Campo obrigatório"
+            mensagemError.style.color = '#E01E1E';
+            mensagemError.style.fontSize = "8"
+            mensagemError.style.fontWeight = "bold"
+                
+            inputAtual.style.border = `1px solid #E01E1E`
+            inputAtual.setAttribute(`input-valido`, 'false')
+        
+            loginEValido = false
+        }   
+        
+        validaTelaDeLogin();
+    })
 });
 
-campoSenhaLogin.addEventListener('blur', function() {
-    let senhaValidacao = document.getElementById('senhaValidacao');
-
-    if (campoSenhaLogin.value != "") {
-        //Senha tem informação
-        senhaValidacao.innerText = ""
-        campoSenhaLogin.style.border = ``
-        senhaEValido = true;
-    } else {
-        //Senha está vazio
-        senhaValidacao.innerText = "Campo obrigatório"
-        senhaValidacao.style.color = "#E01E1E"
-        senhaValidacao.style.fontSize = "8"
-        senhaValidacao.style.fontWeight = "bold"
-        campoSenhaLogin.style.border = `1px solid #E01E1E`
-        senhaEValido = false;
-    }
-    validaTelaDeLogin();
-});
 
 function validaTelaDeLogin() {
-    if (emailEValido && senhaEValido) {
-        botaoSalvar.removeAttribute('disabled');
-        botaoSalvar.innerText = "Acessar"
-        return true
-    } else {
+    //regexSenhaValida = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z]).{8,15}$/.test(campoSenhaLogin.value)
+    const temInputInvalido = loginValido.find(inputAtual => {
+        return inputAtual.getAttribute(`input-valido`) === `false`
+    })
+
+    if (temInputInvalido) {
         botaoSalvar.setAttribute('disabled', true);
-        botaoSalvar.innerText = "Acessar"
+
         return false
+    } else {
+        botaoSalvar.removeAttribute('disabled');
+        return true
     }
 }
-
-
-
-
-
-
-
-
-
-
-
