@@ -38,7 +38,9 @@ const spinner = {
         const spinnerContainer = document.querySelector("#container-load");
 
         // Removemos o spinner do HTML
-        body.removeChild(spinnerContainer);
+        if(spinnerContainer) {
+            body.removeChild(spinnerContainer);
+        }
 
         // Removemos a classe que oculta o formulário
         divLeft.classList.remove("hidden");
