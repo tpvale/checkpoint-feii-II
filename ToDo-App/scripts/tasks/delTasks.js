@@ -15,8 +15,8 @@ function delTarefa(tarefaId) {
       let urlEndpoint =
         'https://ctd-todo-api.herokuapp.com/v1/tasks/' + tarefaId
 
-      let headerToken = new Headers()
-      headerToken.append('Authorization', tokenJwt)
+      let newTokenHeader = new Headers()
+      newTokenHeader.append('Authorization', tokenJwt)
 
       const configuracaoRequisicao = {
         method: 'DELETE',
