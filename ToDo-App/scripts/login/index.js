@@ -35,10 +35,19 @@ window.addEventListener('load', () => {
         } else {
             evento.preventDefault();
             alert("Ambas as informações devem ser preenchidas");
+
+            }
             
+    fetch(urlEndPointLogin, configDaRequisicao)
+    .then(
+        resultado => {
+            if (resultado.status == 201) {
+            spinner.removeSpinner();
+            return resultado.json();
         }
     });
-
+    
+    })
 
     function login(loginUsuarioJson) {
         //Funcao do Spinner

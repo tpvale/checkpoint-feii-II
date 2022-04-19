@@ -47,4 +47,4 @@ const spinner = {
         divRight.classList.remove("hidden");
         return;
     }
-};
+}
