@@ -65,6 +65,7 @@ small {
   display: flex;
   margin-top:3px;
   letter-spacing: 0.05rem;
+  position: absolute;
 }
 
 #repetirSenhaValidacaoCadastro {
@@ -80,6 +81,8 @@ label {
   margin-top: 1em;
   font-size: 0.8rem;
   letter-spacing: 0.05rem;
+  position: relative;
+  padding-top:12px ;
 }
 
 button {
