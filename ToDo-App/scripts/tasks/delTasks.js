@@ -1,31 +1,44 @@
-function deletarTarefa(idTarefa, tarefaCompleta) {
-  let tokenJwt = sessionStorage.getItem('jwt')
+function removerTarefa(tarefaId) {
+  Swal.fire({
+    title: 'Excluir tarefa?',
+    text: 'Esta ação não pode ser desfeita!',
+    icon: 'warning',
+    background: 'var(--cor-fundo)',
+    color: 'var(--cor-texto)',
+    showCancelButton: true,
+    confirmButtonColor: 'var(--cor-destaque)',
+    cancelButtonColor: 'var(--bs-danger)',
+    confirmButtonText: 'Sim, excluir',
+    cancelButtonText: 'Cancelar'
+  }).then(result => {
+    if (result.isConfirmed) {
+      let urlEndpoint =
+        'https://ctd-todo-api.herokuapp.com/v1/tasks/' + tarefaId
 
-  //salvo o endpoint da api numa variavel:
-  let urlEndPointDeletarTasks = `https://ctd-todo-api.herokuapp.com/v1/tasks/${idTarefa}`
+      let headerToken = new Headers()
+      headerToken.append('Authorization', tokenJwt)
 
-  //crio o body da requisiçao de acordo com as informaçoes da API:
-  let configuracaoDeletarTarefas = {
-    method: 'DELETE',
-    headers: {
-      authorization: tokenJwt
-    }
-  }
-
-  //busco a API e deleto a tarefa
-  fetch(urlEndPointDeletarTasks, configuracaoDeletarTarefas)
-    .then(() => {
-      const tarefaRemover = document.getElementById(idTarefa)
-      if (tarefaCompleta) {
-        liTarefaConcluida.removeChild(tarefaRemover)
-        liTarefaConcluida.addEventListener('click', () =>
-          window.location.reload()
-        )
-      } else {
-        tarefasPendentes.removeChild(tarefaRemover)
+      const configuracaoRequisicao = {
+        method: 'DELETE',
+        headers: {
+          Authorization: tokenJwt
+        }
       }
-    })
-    .catch(erro => {
-      console.log(erro)
-    })
+
+      fetch(urlEndpoint, configuracaoRequisicao)
+        .then(resultado => {
+          if (resultado.status == 200) {
+            return resultado.json()
+          }
+          throw resultado
+        })
+        .then(resultado => {
+          console.log(resultado)
+          window.location.reload()
+        })
+        .catch(erro => {
+          console.log(erro)
+        })
+    }
+  })
 }

@@ -38,13 +38,14 @@ function renderizaTarefasPendentes(tarefa) {
   let tarefasPendentesUl = document.querySelector('.tarefas-pendentes')
   let liTarefaPendente = document.createElement('li')
   liTarefaPendente.classList.add('tarefa')
+  dataFormatada = dayjs(tarefa.createdAt).format('DD/MM/YYYY HH:mm')
 
   liTarefaPendente.innerHTML = `
-  <div class="not-done" id="${tarefa.id}" onclick="capturaIdTarefa(${tarefa.id})"></div>
+  <div class="not-done" id="${tarefa.id}" onclick="concluirTarefa(${tarefa.id})"></div>
   <div class="descricao">
     <p class="idDaTarefa">${tarefa.id}</p>
     <p class="nome">${tarefa.description}</p>
-    <p class="timestamp"><i class="far fa-calendar-alt"></i>${tarefa.createdAt}</p>
+    <p class="timestamp"><i class="far fa-calendar-alt"></i>${dataFormatada}</p>
   </div>
   `
   tarefasPendentesUl.appendChild(liTarefaPendente)
@@ -68,7 +69,7 @@ function renderizaTarefasConcluidas(tarefa) {
       <p class="nome">${tarefa.description}</p>
       <div>
           <button><i id="${tarefa.id}" class="fas fa-undo-alt change"></i></button>
-          <button><i id="${tarefa.id}" class="far fa-trash-alt" onclick="deletarTarefa(${tarefa.id}, ${tarefa.completed})"></i></button>
+          <button><i id="${tarefa.id}" class="far fa-trash-alt" onclick="removerTarefa(${tarefa.id})"></i></button>
       </div>
     </div>
   `
