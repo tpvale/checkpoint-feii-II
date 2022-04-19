@@ -133,15 +133,15 @@ button:disabled {
   display:flex;
   flex-direction: column;
   margin:5px;
-  padding:5px;
+  padding-top: 24px;
 }
 
 .valid {
-  color: rgb(126, 200, 237);
+  color: rgb(76, 249, 122);
 }
 
 .invalid {
-  color: rgba(255, 0, 0, 0.75);
+  color: rgb(255, 254, 254);
 }
 
 #mensagem h3 {

@@ -98,7 +98,7 @@ function cadastro(cadastroUserJson) {
 }
 
 //Ao clicar e interagir com campo NOME do cadastro
-campoNomeCadastro.addEventListener('blur', function () {
+campoNomeCadastro.addEventListener('keyup', function () {
   //Capturando o elemento <Small> do html
   var nomeValidacaoCadastro = document.getElementById('nomeValidacaoCadastro')
 
@@ -120,7 +120,7 @@ campoNomeCadastro.addEventListener('blur', function () {
 })
 
 //Ao clicar e interagir com campo Sobrenome do cadastro
-campoSobrenomeCadastro.addEventListener('blur', function () {
+campoSobrenomeCadastro.addEventListener('keyup', function () {
   //Capturando o elemento <Small> do html
   var sobrenomeValidacaoCadastro = document.getElementById(
     'sobrenomeValidacaoCadastro'
@@ -144,7 +144,7 @@ campoSobrenomeCadastro.addEventListener('blur', function () {
 })
 
 //Ao clicar e interagir com campo EMAIL do cadastro
-campoEmailCadastro.addEventListener('blur', function () {
+campoEmailCadastro.addEventListener('keyup', function () {
   //Capturando o elemento <Small> do html
   var emailValidacaoCadastro = document.getElementById('emailValidacaoCadastro')
 
@@ -165,7 +165,7 @@ campoEmailCadastro.addEventListener('blur', function () {
   validacaoTelaCadastro()
 })
 
-campoEmailCadastro.addEventListener('blur', function () {
+campoEmailCadastro.addEventListener('keyup', function () {
   //Capturando o elemento <Small> do html
   var emailValidacaoCadastro = document.getElementById('emailValidacaoCadastro')
 
@@ -196,16 +196,16 @@ var letraMai = document.getElementById('letraMai')
 var numero = document.getElementById('numero')
 var comprimento = document.getElementById('comprimento')
 
-mensagem.style.display = 'none'
-// Quando o usuário clicar no campo de campoSenhaCadastro, mostre a caixa de mensagem
-campoSenhaCadastro.onfocus = function () {
-  document.getElementById('mensagem').style.display = 'flex'
-}
+// mensagem.style.display = 'none'
+// // Quando o usuário clicar no campo de campoSenhaCadastro, mostre a caixa de mensagem
+//  campoSenhaCadastro.onfocus = function () {
+//   document.getElementById('mensagem').style.display = 'flex'
+// }
 
 // Quando o usuário clicar fora do campo de campoSenhaCadastro, oculte a caixa de mensagem
-campoSenhaCadastro.onblur = function () {
-  document.getElementById('mensagem').style.display = 'none'
-}
+// campoSenhaCadastro.onblur = function () {
+//   document.getElementById('mensagem').style.display = 'none'
+// }
 
 // Quando o usuário começa a digitar algo dentro do campo de campoSenhaCadastro
 campoSenhaCadastro.onkeyup = function () {
@@ -262,7 +262,7 @@ campoSenhaCadastro.onkeyup = function () {
 
 var campoRepetirSenhaCadastro = document.getElementById('conferirSenha')
 
-campoRepetirSenhaCadastro.addEventListener('blur', function () {
+campoRepetirSenhaCadastro.addEventListener('keyup', function () {
   //Capturando o elemento <Small> do html
   var repetirSenhaValidacaoCadastro = document.getElementById(
     'repetirSenhaValidacaoCadastro'
@@ -289,23 +289,23 @@ campoRepetirSenhaCadastro.addEventListener('blur', function () {
 
 function validacaoTelaCadastro() {
   if (
-    nomeCadastroEValido &&
-    sobrenomeCadastroEValido &&
-    emailCadastroEValido &&
-    repetirSenhaCadastroEValido &&
-    senhaMinCadastroEvalido && 
-    senhaMaiCadastroEvalido && 
-    senhaNumCadastroEvalido && 
-    senhaTamCadastroEvalido
+    !nomeCadastroEValido ||
+    !sobrenomeCadastroEValido ||
+    !emailCadastroEValido ||
+    !repetirSenhaCadastroEValido ||
+    !senhaMinCadastroEvalido || 
+    !senhaMaiCadastroEvalido || 
+    !senhaNumCadastroEvalido || 
+    !senhaTamCadastroEvalido
   ) {
+    
+    botaoCriarConta.setAttribute('disabled', true)
+    botaoCriarConta.style.background = 'grey'
+    return false
+  } else {
     botaoCriarConta.removeAttribute('disabled')
-    botaoCriarConta.innerText = 'Criar Conta'
     botaoCriarConta.style.background = '#7898FF'
     return true
-  } else {
-    botaoCriarConta.setAttribute('disabled', true)
-    botaoCriarConta.innerText = 'Criar Conta'
-    return false
   }
 }
 
