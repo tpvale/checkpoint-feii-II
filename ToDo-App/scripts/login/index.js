@@ -65,7 +65,7 @@ window.addEventListener('load', () => {
           fetch(urlEndPointLogin, configDaRequisicao)
           .then(
               resultado => {
-                  if (resultado.status == 200) {
+                  if (resultado.status == 201) {
                   return resultado.json();
               } else {
                   spinner.removeSpinner();
