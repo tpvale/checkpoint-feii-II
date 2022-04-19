@@ -1,5 +1,6 @@
 function delTarefa(tarefaId) {
   Swal.fire({
+<<<<<<< HEAD
     title: 'Excluir tarefa?',
     text: 'Esta ação não pode ser desfeita!',
     width: 'fit-content',
@@ -10,6 +11,11 @@ function delTarefa(tarefaId) {
     cancelButtonColor: '#be98f0',
     confirmButtonText: 'Sim',
     cancelButtonText: 'Cancelar'
+=======
+    title: 'A tarefa foi removida com sucesso!',
+    icon: 'success',
+    showConfirmButton: true
+>>>>>>> 9d357239f4a67295a6e6efca03edee2e98027b9e
   }).then(result => {
     if (result.isConfirmed) {
       let urlEndpoint =
