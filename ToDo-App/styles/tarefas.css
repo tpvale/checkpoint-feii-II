@@ -1,7 +1,7 @@
 @import url('./common.css');
 header {
   display: flex;
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  background: linear-gradient(90deg, rgb(156, 58, 178),rgb(84, 26, 135));
   box-shadow: 0px 3px 5px lightgrey;
   padding: 0 3em;
   margin-bottom: 2em;
@@ -31,15 +31,22 @@ a {
   height: 2em;
   width: 2em;
   border-radius: 50%;
-  background-color: white;
+  background-color: rgb(204, 141, 228);
   opacity: .4;
   margin-left: .7em;
 }
 
+.user-info .user-image img{
+  height: 2em;
+  width: 2em;
+  border-radius: 50%;
+  background-color: rgb(214, 135, 238);
+}
+
 #closeApp{
   margin-left: 15px;
-  font-size: .7em;
-  background-color: rgb(218, 88, 88);
+  font-size: .8em;
+  background-color: rgb(227, 57, 57);
   color: white;
   border-radius: 50vh;
   padding: 5px 10px;

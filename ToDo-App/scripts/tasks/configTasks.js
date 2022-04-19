@@ -41,7 +41,7 @@ function renderizaTarefasPendentes(tarefa) {
   dataFormatada = dayjs(tarefa.createdAt).format('DD/MM/YYYY HH:mm')
 
   liTarefaPendente.innerHTML = `
-  <div class="not-done" id="${tarefa.id}" onclick="concluirTarefa(${tarefa.id})"></div>
+  <div class="not-done" id="${tarefa.id}" onclick="editTarefa(${tarefa.id})"></div>
   <div class="descricao">
     <p class="idDaTarefa">${tarefa.id}</p>
     <p class="nome">${tarefa.description}</p>
@@ -68,8 +68,8 @@ function renderizaTarefasConcluidas(tarefa) {
     <div class="descricao">
       <p class="nome">${tarefa.description}</p>
       <div>
-          <button><i id="${tarefa.id}" class="fas fa-undo-alt change"></i></button>
-          <button><i id="${tarefa.id}" class="far fa-trash-alt" onclick="removerTarefa(${tarefa.id})"></i></button>
+          <button><i id="${tarefa.id}" class="fas fa-undo-alt change" onclick="restTarefa(${tarefa.id})"></i></button>
+          <button><i id="${tarefa.id}" class="far fa-trash-alt" onclick="delTarefa(${tarefa.id})"></i></button>
       </div>
     </div>
   `

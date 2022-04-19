@@ -1,11 +1,14 @@
-function editTarefa(tarefaId) {
+function restTarefa(tarefaId) {
   let urlEndpoint = 'https://ctd-todo-api.herokuapp.com/v1/tasks/' + tarefaId
+
+  let headerToken = new Headers()
+  headerToken.append('Authorization', tokenJwt)
 
   const objetoTarefa = {
     completed: ''
   }
 
-  objetoTarefa.completed = true
+  objetoTarefa.completed = false
 
   const objetoTarefaEmJson = JSON.stringify(objetoTarefa)
 

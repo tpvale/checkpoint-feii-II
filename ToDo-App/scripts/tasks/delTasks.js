@@ -1,14 +1,14 @@
-function removerTarefa(tarefaId) {
+function delTarefa(tarefaId) {
   Swal.fire({
     title: 'Excluir tarefa?',
     text: 'Esta ação não pode ser desfeita!',
-    icon: 'warning',
-    background: 'var(--cor-fundo)',
-    color: 'var(--cor-texto)',
+    width: 'fit-content',
+    background: '#8E64C5',
+    color: 'white',
     showCancelButton: true,
-    confirmButtonColor: 'var(--cor-destaque)',
-    cancelButtonColor: 'var(--bs-danger)',
-    confirmButtonText: 'Sim, excluir',
+    confirmButtonColor: '#be98f0',
+    cancelButtonColor: '#be98f0',
+    confirmButtonText: 'Sim',
     cancelButtonText: 'Cancelar'
   }).then(result => {
     if (result.isConfirmed) {
