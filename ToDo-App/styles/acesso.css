@@ -141,7 +141,7 @@ button:disabled {
 }
 
 .invalid {
-  color: rgb(255, 254, 254);
+  color: grey;
 }
 
 #mensagem h3 {
