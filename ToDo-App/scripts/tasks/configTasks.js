@@ -32,9 +32,7 @@ function NomeSobrenomeUsuario() {
     })
 }
 
-
 // Renderizando Tarefas Pendentes // Renderizando Tarefas Pendentes
-
 
 function renderizaTarefasPendentes(tarefa) {
   let tarefasPendentesUl = document.querySelector('.tarefas-pendentes')
@@ -62,6 +60,7 @@ function renderizaTarefasConcluidas(tarefa) {
   let tarefasConcluidasUl = document.querySelector('.tarefas-terminadas')
   let liTarefaConcluida = document.createElement('li')
   liTarefaConcluida.classList.add('tarefa')
+  liTarefaConcluida.setAttribute('id', tarefa.id)
 
   liTarefaConcluida.innerHTML = `
     <div class="done"></div>
@@ -69,7 +68,7 @@ function renderizaTarefasConcluidas(tarefa) {
       <p class="nome">${tarefa.description}</p>
       <div>
           <button><i id="${tarefa.id}" class="fas fa-undo-alt change"></i></button>
-          <button><i id="${tarefa.id}" class="far fa-trash-alt"></i></button>
+          <button><i id="${tarefa.id}" class="far fa-trash-alt" onclick="deletarTarefa(${tarefa.id}, ${tarefa.completed})"></i></button>
       </div>
     </div>
   `
@@ -78,39 +77,35 @@ function renderizaTarefasConcluidas(tarefa) {
 
 function localizaTarefasUsuario(tokenJwt) {
   let urlEndPointListTasks = 'https://ctd-todo-api.herokuapp.com/v1/tasks'
-      let configDaRequisicao = {
-        method: 'GET',
-        headers: {
-          'authorization': tokenJwt
-        }}
+  let configDaRequisicao = {
+    method: 'GET',
+    headers: {
+      authorization: tokenJwt
+    }
+  }
 
-        fetch(urlEndPointListTasks, configDaRequisicao)
-        .then(resultado => {
-          if (resultado.status == 200) {
-            return resultado.json()
-          }
-          throw resultado.status
-        })
-        .then(resultado => {
-          for(let tarefa of resultado) {
-          if(tarefa.completed) {
-            renderizaTarefasConcluidas(tarefa);
-          } else {
-          renderizaTarefasPendentes(tarefa);
-          }}
-        console.log(resultado)})
-        .catch(erro => {
-          console.log(erro)
-        })
+  fetch(urlEndPointListTasks, configDaRequisicao)
+    .then(resultado => {
+      if (resultado.status == 200) {
+        return resultado.json()
+      }
+      throw resultado.status
+    })
+    .then(resultado => {
+      for (let tarefa of resultado) {
+        if (tarefa.completed) {
+          renderizaTarefasConcluidas(tarefa)
+        } else {
+          renderizaTarefasPendentes(tarefa)
+        }
+      }
+      console.log(resultado)
+    })
+    .catch(erro => {
+      console.log(erro)
+    })
 }
-
-
-
-
 
 function capturaIdTarefa(idTarefa) {
   console.log(idTarefa)
 }
-
-
-     

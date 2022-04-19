@@ -1,21 +1,31 @@
+function deletarTarefa(idTarefa, tarefaCompleta) {
+  let tokenJwt = sessionStorage.getItem('jwt')
 
+  //salvo o endpoint da api numa variavel:
+  let urlEndPointDeletarTasks = `https://ctd-todo-api.herokuapp.com/v1/tasks/${idTarefa}`
 
-function delTask(id, tokenJwt){
-  let urlEndPointDelTask = 'https://ctd-todo-api.herokuapp.com/v1/tasks/${id}'
-  let configDaRequisicao = {
+  //crio o body da requisiçao de acordo com as informaçoes da API:
+  let configuracaoDeletarTarefas = {
     method: 'DELETE',
     headers: {
-      'authorization': tokenJwt
+      authorization: tokenJwt
     }
   }
 
-  fetch(urlEndPointDelTask, configDaRequisicao)
-  .then(resultado => {
-    if (resultado.status == 200) {
-      return resultado.json()
-    } else {
-     throw resultado.status
-    }
-  })
-  .then()
+  //busco a API e deleto a tarefa
+  fetch(urlEndPointDeletarTasks, configuracaoDeletarTarefas)
+    .then(() => {
+      const tarefaRemover = document.getElementById(idTarefa)
+      if (tarefaCompleta) {
+        liTarefaConcluida.removeChild(tarefaRemover)
+        liTarefaConcluida.addEventListener('click', () =>
+          window.location.reload()
+        )
+      } else {
+        tarefasPendentes.removeChild(tarefaRemover)
+      }
+    })
+    .catch(erro => {
+      console.log(erro)
+    })
 }
