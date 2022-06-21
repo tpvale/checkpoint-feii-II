@@ -22,11 +22,11 @@ form {
   align-items: center;
   flex-direction: column;
   margin: 1.5em auto;
-  box-shadow: 0 1px 1px rgba(222, 73, 239, 0.6);
+  box-shadow: 0 1px 1px #6c63ff;
   padding: 1em 2.5em;
   box-sizing: border-box;
-  border-top: 0.5px solid rgba(222, 73, 239, 0.6);
-  border-right: 0.5px solid rgba(222, 73, 239, 0.6);
+  border-top: 0.5px solid #6c63ff;
+  border-right: 0.5px solid #6c63ff;
   border-radius: 10px;
 }
 
@@ -37,7 +37,7 @@ form:after {
   height: 100%;
   top: 0;
   left: 0;
-  background: rgba(222, 73, 239, 0.6);
+  background: #6c63ff;
   border-top-left-radius: 10px ;
   border-bottom-left-radius: 10px ;
 }
@@ -125,7 +125,7 @@ button:disabled {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgba(10, 25, 70, 0.8)
+  background-color:#2F2E41;
 }
 
 /* Estilo confirmação de senha */
@@ -137,7 +137,7 @@ button:disabled {
 }
 
 .valid {
-  color: rgb(76, 249, 122);
+  color: rgb(61, 188, 95);
 }
 
 .invalid {
