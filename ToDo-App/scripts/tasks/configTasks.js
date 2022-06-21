@@ -43,7 +43,7 @@ function renderizaTarefasPendentes(tarefa) {
   liTarefaPendente.innerHTML = `
   <div class="not-done" id="${tarefa.id}" onclick="editTarefa(${tarefa.id})"></div>
   <div class="descricao">
-    <p class="idDaTarefa">${tarefa.id}</p>
+   <!--  <p class="idDaTarefa">${tarefa.id}</p> -->
     <p class="nome">${tarefa.description}</p>
     <p class="timestamp"><i class="far fa-calendar-alt"></i>${dataFormatada}</p>
   </div>

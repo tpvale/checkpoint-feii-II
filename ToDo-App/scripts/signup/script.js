@@ -87,8 +87,10 @@ window.addEventListener('load', () => {
     fetch(urlEndPointCadastro, configDaRequisicao)
       .then(resultado => {
         if (resultado.status == 201) {
-          spinner.removeSpinner()
           return resultado.json()
+        } else {
+          spinner.removeSpinner();
+          location.href = 'index.html'
         }
         throw resultado
       })
